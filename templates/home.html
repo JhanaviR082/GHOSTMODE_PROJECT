@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl mb-6">
+            <span class="block bg-gradient-to-r from-ghost-primary to-ghost-accent bg-clip-text text-transparent">GhostMode</span>
+        </h1>
+        <p class="mt-3 max-w-md mx-auto text-lg text-gray-300 sm:text-xl md:mt-5 md:max-w-3xl">
+            Track your digital detox journey with style
+        </p>
+    </div>
+
+    <div class="mt-10 sm:mt-12">
+        <div class="relative rounded-xl overflow-hidden bg-ghost-dark p-0.5">
+            <div class="absolute inset-0 bg-gradient-to-r from-ghost-primary to-ghost-accent opacity-30"></div>
+            <div class="relative rounded-lg bg-ghost-darker p-8">
+                {% if not user.is_authenticated %}
+                <div class="text-center">
+                    <h3 class="text-lg font-medium text-white mb-6">Ready to begin your detox?</h3>
+                    <div class="mt-5 sm:mt-8 sm:flex sm:justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                        <a href="{% url 'login' %}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-ghost-primary hover:bg-ghost-secondary md:py-4 md:text-lg md:px-10 transition-all duration-200">
+                            Login
+                        </a>
+                        <a href="{% url 'signup' %}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-ghost-primary bg-white hover:bg-gray-100 md:py-4 md:text-lg md:px-10 transition-all duration-200">
+                            Sign Up
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="text-center">
+                    <h3 class="text-lg font-medium text-white mb-6">Welcome back, detox warrior!</h3>
+                    <div class="mt-5 sm:mt-8 flex justify-center">
+                        <a href="{% url 'dashboard' %}" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-ghost-primary to-ghost-accent hover:from-ghost-secondary hover:to-ghost-accent md:py-4 md:text-lg md:px-10 transition-all duration-200 shadow-lg">
+                            Go to Dashboard
+                        </a>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

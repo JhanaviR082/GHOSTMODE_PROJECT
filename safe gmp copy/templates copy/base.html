@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-900">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhostMode | {% block title %}{% endblock %}</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Heroicons -->
+    <script src="https://unpkg.com/@heroicons/react@2.0.13/dist/index.umd.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        ghost: {
+                            primary: '#6d28d9',
+                            secondary: '#8b5cf6',
+                            accent: '#a78bfa',
+                            dark: '#0f172a',
+                            darker: '#020617'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="min-h-screen flex flex-col bg-ghost-darker text-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-ghost-dark border-b border-ghost-primary/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <a href="{% url 'home' %}" class="flex-shrink-0 flex items-center">
+                        <span class="text-ghost-accent text-2xl">👻</span>
+                        <span class="ml-2 text-xl font-bold bg-gradient-to-r from-ghost-primary to-ghost-accent bg-clip-text text-transparent">GhostMode</span>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'dashboard' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
+                                <span class="mr-1">📊</span> Dashboard
+                            </a>
+                            <a href="{% url 'password_change' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
+                                <span class="mr-1">🔑</span> Password
+                            </a>
+                            <a href="{% url 'logout' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
+                                <span class="mr-1">🚪</span> Logout
+                            </a>
+                        {% else %}
+                            <a href="{% url 'login' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
+                                <span class="mr-1">🔑</span> Login
+                            </a>
+                            <a href="{% url 'signup' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
+                                <span class="mr-1">📝</span> Sign Up
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        {% if messages %}
+        <div class="mb-6 space-y-3">
+            {% for message in messages %}
+            <div class="p-4 rounded-md bg-ghost-dark border border-ghost-primary/30 shadow-lg" role="alert">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        {% if message.tags == 'success' %}
+                        <span class="text-green-400">✓</span>
+                        {% elif message.tags == 'error' %}
+                        <span class="text-red-400">✗</span>
+                        {% else %}
+                        <span class="text-blue-400">ℹ</span>
+                        {% endif %}
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium">{{ message }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-ghost-dark border-t border-ghost-primary/10 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p class="text-center text-sm text-gray-400">
+                &copy; {% now "Y" %} GhostMode. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load tz %}
+
+{% block content %}
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Main Content -->
+        <div class="lg:w-2/3">
+            <!-- Header -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-white mb-2">Dashboard</h1>
+                <p class="text-gray-400">Track your digital detox progress</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-400">Current Streak</p>
+                            <h3 class="text-4xl font-bold text-white mt-1">{{ current_streak }}</h3>
+                            <p class="text-xs text-gray-500 mt-2">Longest streak: {{ longest_streak }} days</p>
+                        </div>
+                        <div class="bg-ghost-primary/10 p-3 rounded-full">
+                            <span class="text-ghost-primary text-2xl">🔥</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-400">Total Detox Time</p>
+                            <h3 class="text-4xl font-bold text-white mt-1">{{ total_detox_time }}</h3>
+                            <p class="text-xs text-gray-500 mt-2">minutes of focus</p>
+                        </div>
+                        <div class="bg-ghost-primary/10 p-3 rounded-full">
+                            <span class="text-ghost-primary text-2xl">⏳</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<!-- Replace the session control section with this -->
+<div class="mb-8">
+    {% if active_session %}
+    <div class="bg-ghost-dark rounded-xl p-6 border border-purple-500/20 shadow-lg relative">
+        <div class="absolute top-0 right-0 mt-2 mr-2">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 animate-pulse">
+                LIVE
+            </span>
+        </div>
+        
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-medium text-white">Active Session</h3>
+            <div class="text-purple-400 text-sm">
+                Started: {{ active_session.start_time|localtime|time }}
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <div class="flex justify-between text-sm text-gray-400 mb-1">
+                <span>Duration:</span>
+                <span id="session-timer">00:00:00</span>
+            </div>
+        </div>
+        
+        <form method="post" action="{% url 'end_session' %}" class="mt-4">
+            {% csrf_token %}
+            <button type="submit" 
+                class="w-full flex items-center justify-center px-4 py-3 rounded-md text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-lg">
+                <span class="mr-2">⏹️</span> End Session
+            </button>
+        </form>
+    </div>
+    {% else %}
+    <form method="post" action="{% url 'start_session' %}">
+        {% csrf_token %}
+        <button type="submit" 
+            class="w-full flex items-center justify-center px-4 py-4 rounded-md text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 shadow-lg">
+            <span class="mr-2">👻</span> Start Ghost Session
+        </button>
+    </form>
+    {% endif %}
+</div>
+            <!-- Daily Check-in -->
+            <div class="mb-8">
+                <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg">
+                    <h3 class="text-lg font-medium text-white mb-4">Today's Check-in</h3>
+                    {% if today_checkin.checked_in %}
+                    <div class="flex items-center justify-center p-4 rounded-lg bg-green-900/20 border border-green-500/20">
+                        <span class="text-green-400 mr-2">✓</span>
+                        <p class="text-green-400">You already checked in today!</p>
+                    </div>
+                    {% else %}
+                    <form method="POST" action="{% url 'mark_detox_day' %}">
+                        {% csrf_token %}
+                        <button class="w-full flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-lg">
+                            <span class="mr-2">✅</span> A click a day keeps the streak in play
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Notes Section -->
+            <div class="mb-8">
+                <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg">
+                    <h3 class="text-lg font-medium text-white mb-4">Productive Things Done Instead</h3>
+                    <form method="POST" class="mb-6">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="{{ form.note.id_for_label }}" class="block text-sm font-medium text-gray-400 mb-2">Add a note</label>
+                            {{ form.note }}
+                        </div>
+                        <button type="submit" class="w-full sm:w-auto flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-ghost-primary hover:bg-ghost-secondary transition-all duration-200">
+                            Add Note
+                        </button>
+                    </form>
+                    
+                    <div class="space-y-3">
+                        {% for note in notes %}
+                        <div class="p-4 rounded-lg bg-ghost-darker border border-ghost-primary/10">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 text-ghost-primary">📝</div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-gray-300">{{ note.note }}</p>
+                                    <p class="text-xs text-gray-500 mt-1">{{ note.created_at|date:"M d, H:i" }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="text-center py-6">
+                            <p class="text-gray-500">No notes yet. Add what you've accomplished!</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="lg:w-1/3">
+            <!-- Badges Section -->
+            <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg mb-6">
+                <h3 class="text-lg font-medium text-white mb-4 flex items-center">
+                    <span class="mr-2">🏆</span> Your Badges
+                </h3>
+                
+                {% if badges %}
+                <div class="grid grid-cols-2 gap-4">
+                    {% for badge in badges %}
+                    <div class="text-center">
+                        <div class="mx-auto mb-2 w-16 h-16 rounded-full bg-ghost-darker border-2 border-ghost-primary/30 flex items-center justify-center p-2">
+                            <img src="{{ badge.badge.image.url }}" alt="{{ badge.badge.name }}" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="text-sm font-medium text-white">{{ badge.badge.name }}</h4>
+                        <p class="text-xs text-gray-400">{{ badge.badge.description }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="text-center py-6">
+                    <div class="mx-auto mb-4 w-20 h-20 rounded-full bg-ghost-darker border-2 border-dashed border-gray-600 flex items-center justify-center">
+                        <span class="text-gray-500 text-2xl">🏆</span>
+                    </div>
+                    <p class="text-gray-500">No badges yet. Keep going!</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg">
+    <div class="flex items-center justify-between">
+        <div>
+            <p class="text-sm font-medium text-gray-400">Current Streak</p>
+            <h3 class="text-4xl font-bold text-white mt-1">{{ request.user.userprofile.detox_streak }}</h3>
+            <p class="text-xs text-gray-500 mt-2">Longest streak: {{ request.user.userprofile.longest_streak }} days</p>
+        </div>
+        <div class="bg-ghost-primary/10 p-3 rounded-full">
+            <span class="text-ghost-primary text-2xl">🔥</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% if active_session %}
+<script>
+    // Timer functionality for active session
+    function updateTimer() {
+        const startTime = new Date("{{ active_session.start_time|date:'c' }}").getTime();
+        const now = new Date().getTime();
+        const diff = now - startTime;
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById('session-timer').textContent = 
+            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+</script>
+{% endif %}
