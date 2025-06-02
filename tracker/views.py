@@ -1,3 +1,4 @@
+#Byjr082to views
 import random
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
