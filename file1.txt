@@ -103,73 +103,287 @@ A matrix with 9 elements is shown below.
 
 Matrix
 10. Trie:
-Trie is an efficient information retrieval data structure. Using Trie, search complexities can be brought to an optimal limit (key length). If we store keys in the binary search tree, a well-balanced BST will need time proportional to M * log N, where M is maximum string length and N is the number of keys in the tree. Using Trie, we can search the key in O(M) time. However, the penalty is on Trie storage requirements. 
+Trie is an efficient information retrieval data structure. Using Trie, search complexities can be brought to an optimal limit (key length). If weFor the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
 
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
 
-Trie Data Structure
-11. Graph:
-Graph is a data structure that consists of a collection of nodes (vertices) connected by edges. Graphs are used to represent relationships between objects and are widely used in computer science, mathematics, and other fields. Graphs can be used to model a wide variety of real-world systems, such as social networks, transportation networks, and computer networks.
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
 
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
 
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
 
+Motivations[edit]
+A digital detox aims to counteract the negative impacts of excessive screen and technology use, which can lead to both physical and mental health issues.  
 
+Physical effects[edit]
+Physical effects of technology addiction include illness caused by germs on a phone, eye strain, wrist strain, and neck problems.[9] Neck problems, sometimes called ‘tech neck’, result from leaning the head forward for extended periods to look at a phone. This can lead to chronic pain and deformities such as hunchback.  Neck and back pain from excessive phone use can also lead to extreme migraines.[10]
 
-graphp
-Graph Data Structure
+The brain, especially grey matter and the cerebral cortex is also impacted by screen time. Adults with a diagnosed smartphone addiction have lower gray matter volume and a thinner cerebral cortex compared to those of adults without smartphone addictions. Gray matter is responsible for movement, memory, and emotions. The cerebral cortex is responsible for memory, decision-making, and problem-solving.[11]
 
+Sleep habits are also impacted by smartphone use, as blue light from screens can disrupt sleep patterns through the suppression of the hormone melatonin. This hormone imbalance from diminished melatonin disrupts the REM sleep cycle which is essential for storing memories in the brain.[12]
 
+Mental health and behavioral changes[edit]
+Technology reprograms people to feel more anxious when they are not in its presence. Additionally, having a phone close to a person’s face can trigger a fight or flight response, setting an anxious tone for the day.[13] Screen time’s effect on mental health can also be demonstrated through a positive correlation between depression and screen time. Screen time, specifically in the form of social media, has been found to harm self-esteem.[14]
 
+Screen addiction shares some characteristics with other addictions including alcohol dependence and gambling. Reward-style games, such as some downloadable on smartphones, have been found to lead to obsessive behaviors.[15] Additionally, screen addiction can affect children's ability to learn and focus.[14]
 
-Applications of Data Structures:
-Data structures are used in various fields such as:
+Process[edit]
+The process of a digital detox can vary widely depending on an individual’s goals, motivations, and lifestyle.[16] Methods include deleting media platforms, muting notifications, and abstaining entirely from digital media.[17] There are three different variables in a digital detox: time frame, the extent of intervention, and the amount of outside assistance.[18] Generally, digital detoxification can be split into two categories: moderate and complete.
 
-Operating system
-Graphics
-Computer Design
-Blockchain
-Genetics
-Image Processing
-Simulation,
- etc.
+Moderate detox[edit]
+A moderate digital detox involves limiting device and social media usage. Common executions in a moderate detox center on setting boundaries. Examples of boundaries include limiting social media usage to specific times of day or implementing screen-free periods, especially in the morning or evening.[19] One way of curbing overuse of digital devices is to allocate some of the uses of a smartphone to non-digital means. In 2019 Google announced a "paper phone" which can contain daily agendas, directions, and other uses so that people rely less on their smartphone.[20] Another key element of a moderate detox is controlling the frequency of notifications and alerts.[21] This can alleviate the temptation to check devices continuously throughout the day.
 
+Complete detox[edit]
+A complete detox is an absolute break from digital devices for a set period. This form of detox can be conducted for various periods, the most common ranging between a week and a month. During a complete detox, individuals delete or log out of all social media and messaging apps. Many disable their devices entirely.[22] Some individuals implement this form of detox during a vacation or a period when there are no work or social obligations that would require their online presence. The tourism industry has found a niche market for 'digital detox travel packages' where tourists are disconnected from their Information and communications technology by traveling to remote areas. A study from University of Nottingham Ningbo China found that the biggest motivators for embarking on a digital detox holiday include mindfulness, technostress, relaxation, and self-expression.[23] Digital detox retreats increase accountability among individuals and prevent the temptation to check devices or engage in habitual online activities.
 
-Comment
+Impact[edit]
+Relationships[edit]
+Digital detoxes have been found to have a positive impact on relationships from a refocus on offline social interactions. People can build stronger social bonds when they do not check their phones as frequently.[24] Despite this positive impact, studies have found negative effects of digital detoxes on social relationships and interactions. Digital detoxes have also been shown to cause a higher social pressure on participants during social media abstinence compared to pre-intervention social pressure measurements. Furthermore, some research indicates that digital detoxes can result in the fear of missing out (FOMO) on social activities.[25]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
 
-More info
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
 
-Campus Training Program
-Next Article 
-Data Structure Types, Classifications and Applications
-Similar Reads
-Introduction to Tree Data Structure
-Tree data structure is a hierarchical structure that is used to represent and organize data in the form of parent child relationship. The following are some real world sit...
-15+ min read
-Introduction to Linear Data Structures
-Linear Data Structures are a type of data structure in computer science where data elements are arranged sequentially or linearly. Each element has a previous and next adj...
-15+ min read
-Introduction to Graph Data Structure
-Graph Data Structure is a non-linear data structure consisting of vertices and edges. It is useful in fields such as social network analysis, recommendation systems, and c...
-15+ min read
-Introduction to Augmented Data Structure
-Data Structures play a significant role in building software and applications but many a times all our requirements are not satisfied using an existing data structure. Thi...
-15+ min read
-Introduction to Splay tree data structure
-Splay tree is a self-adjusting binary search tree data structure, which means that the tree structure is adjusted dynamically based on the accessed or inserted elements. I...
-15+ min read
-Introduction to Built-in Data Structures in C#
-In the C#, we have data structures like a dictionary, array, stack, hashtable, queue, Linkedlist, etc. Each data structure allows us to play with the collection of data wi...
-15 min read
-Introduction to Hierarchical Data Structure
-We have discussed Overview of Array, Linked List, Queue and Stack. In this article following Data Structures are discussed. 5. Binary Tree 6. Binary Search Tree 7. Binary...
-15+ min read
-String in Data Structure
-A string is a sequence of characters. The following facts make string an interesting data structure.Small set of elements. Unlike normal array, strings typically have smal...
-15+ min read
-Introduction to Built-in Data Structures in JavaScript
-JavaScript (JS) is the most popular lightweight, interpreted compiled programming language, and might be your first preference for Client-side as well as Server-side devel...
-10 min read
-Introduction to DSA
-Data Structures and Algorithms (DSA) refer to the study of methods for organizing and storing data and the design of procedures (algorithms) for solving problems, which op...
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
+
+Motivations[edit]
+A digital detox aims to counteract the negative impacts of excessive screen and technology use, which can lead to both physical and mental health issues.  
+
+Physical effects[edit]
+Physical effects of technology addiction include illness caused by germs on a phone, eye strain, wrist strain, and neck problems.[9] Neck problems, sometimes called ‘tech neck’, result from leaning the head forward for extended periods to look at a phone. This can lead to chronic pain and deformities such as hunchback.  Neck and back pain from excessive phone use can also lead to extreme migraines.[10]
+
+The brain, especially grey matter and the cerebral cortex is also impacted by screen time. Adults with a diagnosed smartphone addiction have lower gray matter volume and a thinner cerebral cortex compared to those of adults without smartphone addictions. Gray matter is responsible for movement, memory, and emotions. The cerebral cortex is responsible for memory, decision-making, and problem-solving.[11]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
+
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
+
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
+
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
+
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
+
+Motivations[edit]
+A digital detox aims to counteract the negative impacts of excessive screen and technology use, which can lead to both physical and mental health issues.  
+
+Physical effects[edit]
+Physical effects of technology addiction include illness caused by germs on a phone, eye strain, wrist strain, and neck problems.[9] Neck problems, sometimes called ‘tech neck’, result from leaning the head forward for extended periods to look at a phone. This can lead to chronic pain and deformities such as hunchback.  Neck and back pain from excessive phone use can also lead to extreme migraines.[10]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
+
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
+
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
+
+Motivations[edit]
+A digital detox aims to counteract the negative impacts of excessive screen and technology use, which can lead to both physical and mental health issues.  
+
+Physical effects[edit]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
+
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
+
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
+
+Motivations[edit]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
+
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
+
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
+
+Motivations[edit]
+A digital detox aims to counteract the negative impacts of excessive screen and technology use, which can lead to both physical and mental health issues.  
+
+Physical effects[edit]
+Physical effects of technology addiction include illness caused by germs on a phone, eye strain, wrist strain, and neck problems.[9] Neck problems, sometimes called ‘tech neck’, result from leaning the head forward for extended periods to look at a phone. This can lead to chronic pain and deformities such as hunchback.  Neck and back pain from excessive phone use can also lead to extreme migraines.[10]
+
+The brain, especially grey matter and the cerebral cortex is also impacted by screen time. Adults with a diagnosed smartphone addiction have lower gray matter volume and a thinner cerebral cortex compared to those of adults without smartphone addictions. Gray matter is responsible for movement, memory, and emotions. The cerebral cortex is responsible for memory, decision-making, and problem-solving.[11]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
+
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
+
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
+
+Motivations[edit]
+A digital detox aims to counteract the negative impacts of excessive screen and technology use, which can lead to both physical and mental health issues.  
+
+Physical effects[edit]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
+
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
+
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
+
+Motivations[edit]
+A digital detox aims to counteract the negative impacts of excessive screen and technology use, which can lead to both physical and mental health issues.  
+
+Physical effects[edit]
+Physical effects of technology addiction include illness caused by germs on a phone, eye strain, wrist strain, and neck problems.[9] Neck problems, sometimes called ‘tech neck’, result from leaning the head forward for extended periods to look at a phone. This can lead to chronic pain and deformities such as hunchback.  Neck and back pain from excessive phone use can also lead to extreme migraines.[10]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
+
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
+
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
+
+Motivations[edit]
+A digital detox aims to counteract the negative impacts of excessive screen and technology use, which can lead to both physical and mental health issues.  
+
+Physical effects[edit]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
+
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
+
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
+
+Motivations[edit]
+A digital detox aims to counteract the negative impacts of excessive screen and technology use, which can lead to both physical and mental health issues.  
+
+Physical effects[edit]
+Physical effects of technology addiction include illness caused by germs on a phone, eye strain, wrist strain, and neck problems.[9] Neck problems, sometimes called ‘tech neck’, result from leaning the head forward for extended periods to look at a phone. This can lead to chronic pain and deformities such as hunchback.  Neck and back pain from excessive phone use can also lead to extreme migraines.[10]
+For the Digital Detox Week campaign, see Adbusters § Digital Detox Week.
+
+A digital detox is a time without digital devices, such as smartphones.
+A digital detox is a deliberate break from digital devices to mitigate screen overuse and promote offline activities.[1][2] Emerging in response to increasing technology use, the practice addresses concerns about screen addiction’s impact on health and mental well-being. Detox approaches range from setting limits on device usage to complete abstinence, sometimes supported by dedicated retreats or travel packages. Though digital detoxes have shown positive effects on focus, relationships, and overall well-being, they may also raise social pressures and fear of missing out (FOMO).[3]
+
+Background[edit]
+See also: Digital media use and mental health, Problematic social media use, and Problematic smartphone use
+Definition[edit]
+A digital detox is a period of time when a person voluntarily refrains from using digital devices such as smartphones, computers, and social media platforms.[1][2] It encourages awareness of technology use and is aimed at mitigating digital dependency and promoting offline engagement. Subsets of a digital detox include varying levels of decreased electronic use, messaging, social media, and applications.[4]
+
+History[edit]
+Since 2015, discussion and research on the implications of a digital detox have increased.[5] The areas of research can be broken into five main categories: communication, education, tourism, well-being and health, and work environments. The increase in technological advancements has led to a growing demand for research on digital detoxes. The use of video conferencing during COVID-19 has increased the stress-related depletion of physiological resources, leading to negative effects on health.[6]
+
+Celebrities and influencers have promoted the concept of a digital detox. Ed Sheeran and Kendall Jenner have undergone a social media detox and influenced others to do one as well.[7] Comedian Ari Shaffir gained attention for refusing to use a smartphone after concerns about spending too much time on it, especially on social media.[8]
+
+Motivations[edit]
+A digital detox aims to counteract the negative impacts of excessive screen and technology use, which can lead to both physical and mental health issues.  
+
+Physical effects[edit]
+Physical effects of technology addiction include illness caused by germs on a phone, eye strain, wrist strain, and neck problems.[9] Neck problems, sometimes called ‘tech neck’, result from leaning the head forward for extended periods to look at a phone. This can lead to chronic pain and deformities such as hunchback.  Neck and back pain from excessive phone use can also lead to extreme migraines.[10]
+
+The brain, especially grey matter and the cerebral cortex is also impacted by screen time. Adults with a diagnosed smartphone addiction have lower gray matter volume and a thinner cerebral cortex compared to those of adults without smartphone addictions. Gray matter is responsible for movement, memory, and emotions. The cerebral cortex is responsible for memory, decision-making, and problem-solving.[11]
+
+Sleep habits are also impacted by smartphone use, as blue light from screens can disrupt sleep patterns through the suppression of the hormone melatonin. This hormone imbalance from diminished melatonin disrupts the REM sleep cycle which is essential for storing memories in the brain.[12]
+
+Mental health and behavioral changes[edit]
+Technology reprograms people to feel more anxious when they are not in its presence. Additionally, having a phone close to a person’s face can trigger a fight or flight response, setting an anxious tone for the day.[13] Screen time’s effect on mental health can also be demonstrated through a positive correlation between depression and screen time. Screen time, specifically in the form of social media, has been found to harm self-esteem.[14]
+
+Screen addiction shares some characteristics with other addictions including alcohol dependence and gambling. Reward-style games, such as some downloadable on smartphones, have been found to lead to obsessive behaviors.[15] Additionally, screen addiction can affect children's ability to learn and focus.[14]
+
+Process[edit]
+The process of a digital detox can vary widely depending on an individual’s goals, motivations, and lifestyle.[16] Methods include deleting media platforms, muting notifications, and abstaining entirely from digital media.[17] There are three different variables in a digital detox: time frame, the extent of intervention, and the amount of outside assistance.[18] Generally, digital detoxification can be split into two categories: moderate and complete.
+
+Moderate detox[edit]
+A moderate digital detox involves limiting device and social media usage. Common executions in a moderate detox center on setting boundaries. Examples of boundaries include limiting social media usage to specific times of day or implementing screen-free periods, especially in the morning or evening.[19] One way of curbing overuse of digital devices is to allocate some of the uses of a smartphone to non-digital means. In 2019 Google announced a "paper phone" which can contain daily agendas, directions, and other uses so that people rely less on their smartphone.[20] Another key element of a moderate detox is controlling the frequency of notifications and alerts.[21] This can alleviate the temptation to check devices continuously throughout the day.
+
+Complete detox[edit]
+A complete detox is an absolute break from digital devices for a set period. This form of detox can be conducted for various periods, the most common ranging between a week and a month. During a complete detox, individuals delete or log out of all social media and messaging apps. Many disable their devices entirely.[22] Some individuals implement this form of detox during a vacation or a period when there are no work or social obligations that would require their online presence. The tourism industry has found a niche market for 'digital detox travel packages' where tourists are disconnected from their Information and communications technology by traveling to remote areas. A study from University of Nottingham Ningbo China found that the biggest motivators for embarking on a digital detox holiday include mindfulness, technostress, relaxation, and self-expression.[23] Digital detox retreats increase accountability among individuals and prevent the temptation to check devices or engage in habitual online activities.
+
+Impact[edit]
+Relationships[edit]
+Digital detoxes have been found to have a positive impact on relationships from a refocus on offline social interactions. People can build stronger social bonds when they do not check their phones as frequently.[24] Despite this positive impact, studies have found negative effects of digital detoxes on social relationships and interactions. Digital detoxes have also been shown to cause a higher social pressure on participants during social media abstinence compared to pre-intervention social pressure measurements. Furthermore, some research indicates that digital detoxes can result in the fear of missing out (FOMO) on social activities.[25]
+
+Health[edit]
+
+Smartphone usage can disturb sleep and cause vision problems.
+Digital detoxes have been found to have positive effects on physical health, such as reducing eye strain, dry eyes, and blurry vision. Additionally, a digital detox can address neck pain caused by being in a hunched position from looking at a phone.[26] Furthermore, detoxing has been shown to improve time perception in participants.[27]
+
+Digital detoxes have also been found to have a positive impact on mental health. Studies have found that digital detoxes can reduce stress and anxiety caused by the overuse of technology, along with reducing depressive symptoms.[28] Researchers have also found that detoxes can improve feelings of well-being. Overall happiness and life satisfaction were also found to increase with reduced daily social media use.[29]
+Structures and Algorithms (DSA) refer to the study of methods for organizing and storing data and the design of procedures (algorithms) for solving problems, which op...
 15+ min read
 course-img
 90k+ interested Geeks
