@@ -16,6 +16,7 @@ from datetime import date, timedelta
 from .utils import award_brave_start_badge
 from .forms import ProductiveNoteForm
 from .models import ProductiveNote
+print("Testing stash flow")
 
 
 class SignUpView(CreateView):
