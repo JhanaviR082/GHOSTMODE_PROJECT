@@ -1,3 +1,4 @@
+#Hello world jr82 
 #Byjr082to views
 import random
 from django.http import JsonResponse
