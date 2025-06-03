@@ -1,1 +1,894 @@
+Experiment-5
+MySQL Script: Employee Table with Stored Procedure & Cursor
+Create cursor for Employee table & extract the values from the table. 
+Declare the variables ,Open the cursor &extrct the values from the cursor. 
+Close the cursor. 
+Employee(E_id, E_name, Age, Salary) 
+Step 1: Creating the Database and Selecting It
+
+
+CREATE DATABASE program05;
+USE program05;
+Explanation:
+•	Creates a new database named program05.
+•	Selects the program05 database so that all further operations happen inside it.
+________________________________________
+Step 2: Creating the Employee Table
+
+
+CREATE TABLE Employee (
+E_id INT PRIMARY KEY,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a table called Employee with the following columns:
+o	E_id INT PRIMARY KEY → Unique Employee ID.
+o	E_name VARCHAR(50) → Employee's Name (up to 50 characters).
+o	Age INT → Employee's Age.
+o	Salary DECIMAL(10,2) → Employee's Salary (with 2 decimal places).
+________________________________________
+Step 3: Inserting Data into the Employee Table
+
+
+INSERT INTO Employee (E_id, E_name, Age, Salary) VALUES
+(1, 'John Doe', 30, 50000.00),
+(2, 'Jane Smith', 28, 55000.00),
+(3, 'Alice Johnson', 35, 60000.00);
+Explanation:
+•	Inserts three records into the Employee table.
+________________________________________
+Step 4: Checking the Inserted Data
+
+
+SELECT * FROM Employee;
+Explanation:
+•	Displays all records from the Employee table.
+________________________________________
+Step 5: Setting Up a Stored Procedure
+
+
+DELIMITER $$
+Explanation:
+•	Changes the default MySQL delimiter from ; to $$ so that MySQL does not execute the procedure before it is fully written.
+________________________________________
+Step 6: Creating the Stored Procedure GetEmployeeDetails
+
+
+CREATE PROCEDURE GetEmployeeDetails()
+BEGIN
+Explanation:
+•	Creates a stored procedure named GetEmployeeDetails().
+•	The BEGIN statement marks the start of the procedure.
+________________________________________
+Declaring Variables
+
+
+DECLARE v_E_id INT;
+DECLARE v_E_name VARCHAR(50);
+DECLARE v_Age INT;
+DECLARE v_Salary DECIMAL(10,2);
+DECLARE done INT DEFAULT FALSE;
+Explanation:
+•	Declares variables to store data fetched by the cursor:
+o	v_E_id → Employee ID
+o	v_E_name → Employee Name
+o	v_Age → Employee Age
+o	v_Salary → Employee Salary
+o	done → Flag to track the end of data in the cursor
+________________________________________
+Declaring the Cursor
+
+
+DECLARE emp_cursor CURSOR FOR 
+SELECT E_id, E_name, Age, Salary FROM Employee;
+Explanation:
+•	Declares a cursor (emp_cursor) that selects all employees from the Employee table.
+________________________________________
+Handling the End of Data
+
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+Explanation:
+•	Ensures that when there are no more rows to fetch, the done variable is set to TRUE.
+•	Prevents errors when trying to fetch beyond the last row.
+________________________________________
+Creating a Temporary Table
+
+
+CREATE TEMPORARY TABLE IF NOT EXISTS TempEmployee (
+E_id INT,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a temporary table (TempEmployee) to store fetched employee data.
+•	The table is deleted automatically when the session ends.
+________________________________________
+Opening the Cursor
+
+
+OPEN emp_cursor;
+Explanation:
+•	Opens the cursor so that data can be fetched from the Employee table.
+________________________________________
+Looping Through the Employee Table
+
+
+emp_loop: LOOP
+    FETCH emp_cursor INTO v_E_id, v_E_name, v_Age, v_Salary;
+Explanation:
+•	Starts a loop (emp_loop) that fetches one row at a time from the cursor into the declared variables.
+________________________________________
+Exit Condition
+
+
+IF done THEN 
+    LEAVE emp_loop;
+END IF;
+Explanation:
+•	If all rows have been fetched (done = TRUE), the loop exits.
+________________________________________
+Inserting Fetched Data into the Temporary Table
+
+
+INSERT INTO TempEmployee VALUES (v_E_id, v_E_name, v_Age, v_Salary);
+Explanation:
+•	Inserts fetched row data into the temporary table TempEmployee.
+________________________________________
+Closing the Cursor
+
+
+CLOSE emp_cursor;
+Explanation:
+•	Closes the cursor after processing all rows.
+________________________________________
+Displaying the Data
+
+
+SELECT * FROM TempEmployee;
+Explanation:
+•	Retrieves and displays all data stored in TempEmployee.
+________________________________________
+Dropping the Temporary Table
+
+
+DROP TEMPORARY TABLE TempEmployee;
+END $$
+
+DELIMITER ;
+Explanation:
+•	Deletes the temporary table after use.
+•	Ends the stored procedure using END $$.
+•	Restores the default MySQL delimiter (;).
+________________________________________
+Step 7: Calling the Procedure
+
+
+CALL GetEmployeeDetails();
+Explanation:
+•	Executes the procedure, which:
+1.	Fetches employee data using a cursor.
+2.	Stores it in a temporary table.
+3.	Displays the data.
+4.	Deletes the temporary table.
+________________________________________
+Step 8: Cleanup (Deleting Everything)
+
+
+DROP PROCEDURE IF EXISTS GetEmployeeDetails;
+DROP TABLE IF EXISTS Employee;
+DROP DATABASE IF EXISTS program05;
+Explanation:
+•	Deletes everything created by this script:
+o	DROP PROCEDURE → Removes the stored procedure if it exists.
+o	DROP TABLE → Deletes the Employee table.
+o	DROP DATABASE → Deletes the program05 database.
+
+Experiment-5
+MySQL Script: Employee Table with Stored Procedure & Cursor
+Create cursor for Employee table & extract the values from the table. 
+Declare the variables ,Open the cursor &extrct the values from the cursor. 
+Close the cursor. 
+Employee(E_id, E_name, Age, Salary) 
+Step 1: Creating the Database and Selecting It
+
+
+CREATE DATABASE program05;
+USE program05;
+Explanation:
+•	Creates a new database named program05.
+•	Selects the program05 database so that all further operations happen inside it.
+________________________________________
+Step 2: Creating the Employee Table
+
+
+CREATE TABLE Employee (
+E_id INT PRIMARY KEY,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a table called Employee with the following columns:
+o	E_id INT PRIMARY KEY → Unique Employee ID.
+o	E_name VARCHAR(50) → Employee's Name (up to 50 characters).
+o	Age INT → Employee's Age.
+o	Salary DECIMAL(10,2) → Employee's Salary (with 2 decimal places).
+________________________________________
+Step 3: Inserting Data into the Employee Table
+
+
+INSERT INTO Employee (E_id, E_name, Age, Salary) VALUES
+(1, 'John Doe', 30, 50000.00),
+(2, 'Jane Smith', 28, 55000.00),
+(3, 'Alice Johnson', 35, 60000.00);
+Explanation:
+•	Inserts three records into the Employee table.
+________________________________________
+Step 4: Checking the Inserted Data
+
+
+SELECT * FROM Employee;
+Explanation:
+•	Displays all records from the Employee table.
+________________________________________
+Step 5: Setting Up a Stored Procedure
+
+
+DELIMITER $$
+Explanation:
+•	Changes the default MySQL delimiter from ; to $$ so that MySQL does not execute the procedure before it is fully written.
+________________________________________
+Step 6: Creating the Stored Procedure GetEmployeeDetails
+
+
+CREATE PROCEDURE GetEmployeeDetails()
+BEGIN
+Explanation:
+•	Creates a stored procedure named GetEmployeeDetails().
+•	The BEGIN statement marks the start of the procedure.
+________________________________________
+Declaring Variables
+
+
+DECLARE v_E_id INT;
+DECLARE v_E_name VARCHAR(50);
+DECLARE v_Age INT;
+DECLARE v_Salary DECIMAL(10,2);
+DECLARE done INT DEFAULT FALSE;
+Explanation:
+•	Declares variables to store data fetched by the cursor:
+o	v_E_id → Employee ID
+o	v_E_name → Employee Name
+o	v_Age → Employee Age
+o	v_Salary → Employee Salary
+o	done → Flag to track the end of data in the cursor
+________________________________________
+Declaring the Cursor
+
+
+DECLARE emp_cursor CURSOR FOR 
+SELECT E_id, E_name, Age, Salary FROM Employee;
+Explanation:
+•	Declares a cursor (emp_cursor) that selects all employees from the Employee table.
+________________________________________
+Handling the End of Data
+
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+Explanation:
+•	Ensures that when there are no more rows to fetch, the done variable is set to TRUE.
+•	Prevents errors when trying to fetch beyond the last row.
+________________________________________
+Creating a Temporary Table
+
+
+CREATE TEMPORARY TABLE IF NOT EXISTS TempEmployee (
+E_id INT,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a temporary table (TempEmployee) to store fetched employee data.
+•	The table is deleted automatically when the session ends.
+________________________________________
+Opening the Cursor
+
+
+OPEN emp_cursor;
+Explanation:
+•	Opens the cursor so that data can be fetched from the Employee table.
+________________________________________
+Looping Through the Employee Table
+
+
+emp_loop: LOOP
+    FETCH emp_cursor INTO v_E_id, v_E_name, v_Age, v_Salary;
+Explanation:
+•	Starts a loop (emp_loop) that fetches one row at a time from the cursor into the declared variables.
+________________________________________
+Exit Condition
+
+
+IF done THEN 
+    LEAVE emp_loop;
+END IF;
+Explanation:
+•	If all rows have been fetched (done = TRUE), the loop exits.
+________________________________________
+Inserting Fetched Data into the Temporary Table
+
+
+INSERT INTO TempEmployee VALUES (v_E_id, v_E_name, v_Age, v_Salary);
+Explanation:
+•	Inserts fetched row data into the temporary table TempEmployee.
+________________________________________
+Closing the Cursor
+
+
+CLOSE emp_cursor;
+Explanation:
+•	Closes the cursor after processing all rows.
+________________________________________
+Displaying the Data
+
+
+SELECT * FROM TempEmployee;
+Explanation:
+•	Retrieves and displays all data stored in TempEmployee.
+________________________________________
+Dropping the Temporary Table
+
+
+DROP TEMPORARY TABLE TempEmployee;
+END $$
+
+DELIMITER ;
+Explanation:
+•	Deletes the temporary table after use.
+•	Ends the stored procedure using END $$.
+Experiment-5
+MySQL Script: Employee Table with Stored Procedure & Cursor
+Create cursor for Employee table & extract the values from the table. 
+Declare the variables ,Open the cursor &extrct the values from the cursor. 
+Close the cursor. 
+Employee(E_id, E_name, Age, Salary) 
+Step 1: Creating the Database and Selecting It
+
+
+CREATE DATABASE program05;
+USE program05;
+Explanation:
+•	Creates a new database named program05.
+•	Selects the program05 database so that all further operations happen inside it.
+________________________________________
+Step 2: Creating the Employee Table
+
+
+CREATE TABLE Employee (
+E_id INT PRIMARY KEY,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a table called Employee with the following columns:
+o	E_id INT PRIMARY KEY → Unique Employee ID.
+o	E_name VARCHAR(50) → Employee's Name (up to 50 characters).
+o	Age INT → Employee's Age.
+o	Salary DECIMAL(10,2) → Employee's Salary (with 2 decimal places).
+________________________________________
+Step 3: Inserting Data into the Employee Table
+
+
+INSERT INTO Employee (E_id, E_name, Age, Salary) VALUES
+(1, 'John Doe', 30, 50000.00),
+(2, 'Jane Smith', 28, 55000.00),
+(3, 'Alice Johnson', 35, 60000.00);
+Explanation:
+•	Inserts three records into the Employee table.
+________________________________________
+Step 4: Checking the Inserted Data
+
+
+SELECT * FROM Employee;
+Explanation:
+•	Displays all records from the Employee table.
+________________________________________
+Step 5: Setting Up a Stored Procedure
+
+
+DELIMITER $$
+Explanation:
+•	Changes the default MySQL delimiter from ; to $$ so that MySQL does not execute the procedure before it is fully written.
+________________________________________
+Step 6: Creating the Stored Procedure GetEmployeeDetails
+
+
+CREATE PROCEDURE GetEmployeeDetails()
+BEGIN
+Explanation:
+•	Creates a stored procedure named GetEmployeeDetails().
+•	The BEGIN statement marks the start of the procedure.
+________________________________________
+Declaring Variables
+
+Experiment-5
+MySQL Script: Employee Table with Stored Procedure & Cursor
+Create cursor for Employee table & extract the values from the table. 
+Declare the variables ,Open the cursor &extrct the values from the cursor. 
+Close the cursor. 
+Employee(E_id, E_name, Age, Salary) 
+Step 1: Creating the Database and Selecting It
+
+
+CREATE DATABASE program05;
+USE program05;
+Explanation:
+•	Creates a new database named program05.
+•	Selects the program05 database so that all further operations happen inside it.
+________________________________________
+Step 2: Creating the Employee Table
+
+
+CREATE TABLE Employee (
+E_id INT PRIMARY KEY,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a table called Employee with the following columns:
+o	E_id INT PRIMARY KEY → Unique Employee ID.
+o	E_name VARCHAR(50) → Employee's Name (up to 50 characters).
+o	Age INT → Employee's Age.
+o	Salary DECIMAL(10,2) → Employee's Salary (with 2 decimal places).
+________________________________________
+Step 3: Inserting Data into the Employee Table
+
+
+INSERT INTO Employee (E_id, E_name, Age, Salary) VALUES
+(1, 'John Doe', 30, 50000.00),
+(2, 'Jane Smith', 28, 55000.00),
+(3, 'Alice Johnson', 35, 60000.00);
+Explanation:
+•	Inserts three records into the Employee table.
+________________________________________
+Step 4: Checking the Inserted Data
+
+
+SELECT * FROM Employee;
+Explanation:
+•	Displays all records from the Employee table.
+________________________________________
+Step 5: Setting Up a Stored Procedure
+
+
+DELIMITER $$
+Explanation:
+•	Changes the default MySQL delimiter from ; to $$ so that MySQL does not execute the procedure before it is fully written.
+________________________________________
+Step 6: Creating the Stored Procedure GetEmployeeDetails
+
+
+CREATE PROCEDURE GetEmployeeDetails()
+BEGIN
+Explanation:
+•	Creates a stored procedure named GetEmployeeDetails().
+•	The BEGIN statement marks the start of the procedure.
+________________________________________
+Declaring Variables
+Experiment-5
+MySQL Script: Employee Table with Stored Procedure & Cursor
+Create cursor for Employee table & extract the values from the table. 
+Declare the variables ,Open the cursor &extrct the values from the cursor. 
+Close the cursor. 
+Employee(E_id, E_name, Age, Salary) 
+Step 1: Creating the Database and Selecting It
+
+
+CREATE DATABASE program05;
+USE program05;
+Explanation:
+•	Creates a new database named program05.
+•	Selects the program05 database so that all further operations happen inside it.
+________________________________________
+Step 2: Creating the Employee Table
+
+
+CREATE TABLE Employee (
+E_id INT PRIMARY KEY,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a table called Employee with the following columns:
+o	E_id INT PRIMARY KEY → Unique Employee ID.
+o	E_name VARCHAR(50) → Employee's Name (up to 50 characters).
+o	Age INT → Employee's Age.
+o	Salary DECIMAL(10,2) → Employee's Salary (with 2 decimal places).
+________________________________________
+Step 3: Inserting Data into the Employee Table
+
+
+INSERT INTO Employee (E_id, E_name, Age, Salary) VALUES
+(1, 'John Doe', 30, 50000.00),
+(2, 'Jane Smith', 28, 55000.00),
+(3, 'Alice Johnson', 35, 60000.00);
+Explanation:
+•	Inserts three records into the Employee table.
+________________________________________
+Step 4: Checking the Inserted Data
+
+
+SELECT * FROM Employee;
+Explanation:
+•	Displays all records from the Employee table.
+________________________________________
+Step 5: Setting Up a Stored Procedure
+
+
+DELIMITER $$
+Explanation:
+•	Changes the default MySQL delimiter from ; to $$ so that MySQL does not execute the procedure before it is fully written.
+________________________________________
+Step 6: Creating the Stored Procedure GetEmployeeDetails
+
+
+CREATE PROCEDURE GetEmployeeDetails()
+BEGIN
+Explanation:
+•	Creates a stored procedure named GetEmployeeDetails().
+•	The BEGIN statement marks the start of the procedure.
+________________________________________
+Declaring Variables
+
+
+DECLARE v_E_id INT;
+DECLARE v_E_name VARCHAR(50);
+DECLARE v_Age INT;
+DECLARE v_Salary DECIMAL(10,2);
+DECLARE done INT DEFAULT FALSE;
+Explanation:
+•	Declares variables to store data fetched by the cursor:
+o	v_E_id → Employee ID
+o	v_E_name → Employee Name
+o	v_Age → Employee Age
+o	v_Salary → Employee Salary
+o	done → Flag to track the end of data in the cursor
+________________________________________
+Declaring the Cursor
+
+
+DECLARE emp_cursor CURSOR FOR 
+SELECT E_id, E_name, Age, Salary FROM Employee;
+Explanation:
+Experiment-5
+MySQL Script: Employee Table with Stored Procedure & Cursor
+Create cursor for Employee table & extract the values from the table. 
+Declare the variables ,Open the cursor &extrct the values from the cursor. 
+Close the cursor. 
+Employee(E_id, E_name, Age, Salary) 
+Step 1: Creating the Database and Selecting It
+
+
+CREATE DATABASE program05;
+USE program05;
+Explanation:
+•	Creates a new database named program05.
+•	Selects the program05 database so that all further operations happen inside it.
+________________________________________
+Step 2: Creating the Employee Table
+
+
+CREATE TABLE Employee (
+E_id INT PRIMARY KEY,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a table called Employee with the following columns:
+o	E_id INT PRIMARY KEY → Unique Employee ID.
+o	E_name VARCHAR(50) → Employee's Name (up to 50 characters).
+o	Age INT → Employee's Age.
+o	Salary DECIMAL(10,2) → Employee's Salary (with 2 decimal places).
+________________________________________
+Step 3: Inserting Data into the Employee Table
+
+
+INSERT INTO Employee (E_id, E_name, Age, Salary) VALUES
+(1, 'John Doe', 30, 50000.00),
+(2, 'Jane Smith', 28, 55000.00),
+(3, 'Alice Johnson', 35, 60000.00);
+Explanation:
+•	Inserts three records into the Employee table.
+________________________________________
+Step 4: Checking the Inserted Data
+
+
+SELECT * FROM Employee;
+Explanation:
+•	Displays all records from the Employee table.
+________________________________________
+Step 5: Setting Up a Stored Procedure
+
+
+DELIMITER $$
+Explanation:
+•	Changes the default MySQL delimiter from ; to $$ so that MySQL does not execute the procedure before it is fully written.
+________________________________________
+Step 6: Creating the Stored Procedure GetEmployeeDetails
+
+
+CREATE PROCEDURE GetEmployeeDetails()
+BEGIN
+Explanation:
+•	Creates a stored procedure named GetEmployeeDetails().
+•	The BEGIN statement marks the start of the procedure.
+________________________________________
+Declaring Variables
+
+
+DECLARE v_E_id INT;
+DECLARE v_E_name VARCHAR(50);
+DECLARE v_Age INT;
+DECLARE v_Salary DECIMAL(10,2);
+DECLARE done INT DEFAULT FALSE;
+Explanation:
+•	Declares variables to store data fetched by the cursor:
+o	v_E_id → Employee ID
+o	v_E_name → Employee Name
+o	v_Age → Employee Age
+o	v_Salary → Employee Salary
+o	done → Flag to track the end of data in the cursor
+________________________________________
+Declaring the Cursor
+
+
+DECLARE emp_cursor CURSOR FOR 
+SELECT E_id, E_name, Age, Salary FROM Employee;
+Explanation:
+•	Declares a cursor (emp_cursor) that selects all employees from the Employee table.
+________________________________________
+Handling the End of Data
+
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+Explanation:
+•	Ensures that when there are no more rows to fetch, the done variable is set to TRUE.
+•	Prevents errors when trying to fetch beyond the last row.
+________________________________________
+Creating a Temporary Table
+
+
+CREATE TEMPORARY TABLE IF NOT EXISTS TempEmployee (
+E_id INT,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a temporary table (TempEmployee) to store fetched employee data.
+•	The table is deleted automatically when the session ends.
+________________________________________
+Opening the Cursor
+
+
+OPEN emp_cursor;
+Explanation:
+•	Opens the cursor so that data can be fetched from the Employee table.
+________________________________________
+Looping Through the Employee Table
+
+
+emp_loop: LOOP
+    FETCH emp_cursor INTO v_E_id, v_E_name, v_Age, v_Salary;
+Explanation:
+•	Starts a loop (emp_loop) that fetches one row at a time from the cursor into the declared variables.
+________________________________________
+Exit Condition
+
+
+IF done THEN 
+    LEAVE emp_loop;
+END IF;
+Explanation:
+•	If all rows have been fetched (done = TRUE), the loop exits.
+________________________________________
+Inserting Fetched Data into the Temporary Table
+
+
+INSERT INTO TempEmployee VALUES (v_E_id, v_E_name, v_Age, v_Salary);
+Explanation:
+•	Inserts fetched row data into the temporary table TempEmployee.
+________________________________________
+Closing the Cursor
+
+
+CLOSE emp_cursor;
+Explanation:
+•	Closes the cursor after processing all rows.
+________________________________________
+Displaying the Data
+
+
+SELECT * FROM TempEmployee;
+Explanation:
+•	Retrieves and displays all data stored in TempEmployee.
+________________________________________
+Dropping the Temporary Table
+
+
+DROP TEMPORARY TABLE TempEmployee;
+END $$
+
+DELIMITER ;
+Explanation:
+•	Deletes the temporary table after use.
+•	Ends the stored procedure using END $$.
+•	Restores the default MySQL delimiter (;).
+________________________________________
+Step 7: Calling the Procedure
+
+
+CALL GetEmployeeDetails();
+Explanation:
+•	Executes the procedure, which:
+1.	Fetches employee data using a cursor.
+2.	Stores it in a temporary table.
+3.	Displays the data.
+4.	Deletes the temporary table.
+________________________________________
+Step 8: Cleanup (Deleting Everything)
+
+
+DROP PROCEDURE IF EXISTS GetEmployeeDetails;
+DROP TABLE IF EXISTS Employee;
+DROP DATABASE IF EXISTS program05;
+Explanation:
+•	Deletes everything created by this script:
+o	DROP PROCEDURE → Removes the stored procedure if it exists.
+o	DROP TABLE → Deletes the Employee table.
+o	DROP DATABASE → Deletes the program05 database.
+
+Experiment-5
+MySQL Script: Employee Table with Stored Procedure & Cursor
+Create cursor for Employee table & extract the values from the table. 
+Declare the variables ,Open the cursor &extrct the values from the cursor. 
+Close the cursor. 
+Employee(E_id, E_name, Age, Salary) 
+Step 1: Creating the Database and Selecting It
+
+
+CREATE DATABASE program05;
+USE program05;
+Explanation:
+•	Creates a new database named program05.
+•	Selects the program05 database so that all further operations happen inside it.
+________________________________________
+Step 2: Creating the Employee Table
+
+
+CREATE TABLE Employee (
+E_id INT PRIMARY KEY,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a table called Employee with the following columns:
+o	E_id INT PRIMARY KEY → Unique Employee ID.
+o	E_name VARCHAR(50) → Employee's Name (up to 50 characters).
+o	Age INT → Employee's Age.
+o	Salary DECIMAL(10,2) → Employee's Salary (with 2 decimal places).
+________________________________________
+Step 3: Inserting Data into the Employee Table
+
+
+INSERT INTO Employee (E_id, E_name, Age, Salary) VALUES
+(1, 'John Doe', 30, 50000.00),
+(2, 'Jane Smith', 28, 55000.00),
+(3, 'Alice Johnson', 35, 60000.00);
+Explanation:
+•	Inserts three records into the Employee table.
+________________________________________
+Step 4: Checking the Inserted Data
+
+
+SELECT * FROM Employee;
+Explanation:
+•	Displays all records from the Employee table.
+________________________________________
+Step 5: Setting Up a Stored Procedure
+
+
+DELIMITER $$
+Explanation:
+•	Changes the default MySQL delimiter from ; to $$ so that MySQL does not execute the procedure before it is fully written.
+________________________________________
+Step 6: Creating the Stored Procedure GetEmployeeDetails
+
+
+CREATE PROCEDURE GetEmployeeDetails()
+BEGIN
+Explanation:
+•	Creates a stored procedure named GetEmployeeDetails().
+•	The BEGIN statement marks the start of the procedure.
+________________________________________
+Declaring Variables
+
+
+DECLARE v_E_id INT;
+DECLARE v_E_name VARCHAR(50);
+DECLARE v_Age INT;
+DECLARE v_Salary DECIMAL(10,2);
+DECLARE done INT DEFAULT FALSE;
+Explanation:
+•	Declares variables to store data fetched by the cursor:
+o	v_E_id → Employee ID
+o	v_E_name → Employee Name
+o	v_Age → Employee Age
+o	v_Salary → Employee Salary
+o	done → Flag to track the end of data in the cursor
+________________________________________
+Declaring the Cursor
+
+
+DECLARE emp_cursor CURSOR FOR 
+SELECT E_id, E_name, Age, Salary FROM Employee;
+Explanation:
+•	Declares a cursor (emp_cursor) that selects all employees from the Employee table.
+________________________________________
+Handling the End of Data
+
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+Explanation:
+•	Ensures that when there are no more rows to fetch, the done variable is set to TRUE.
+•	Prevents errors when trying to fetch beyond the last row.
+________________________________________
+Creating a Temporary Table
+
+
+CREATE TEMPORARY TABLE IF NOT EXISTS TempEmployee (
+E_id INT,
+E_name VARCHAR(50),
+    Age INT,
+    Salary DECIMAL(10,2)
+);
+Explanation:
+•	Creates a temporary table (TempEmployee) to store fetched employee data.
+•	The table is deleted automatically when the session ends.
+________________________________________
+Opening the Cursor
+
+
+OPEN emp_cursor;
+Explanation:
+•	Opens the cursor so that data can be fetched from the Employee table.
+________________________________________
+Looping Through the Employee Table
+
+
+emp_loop: LOOP
+    FETCH emp_cursor INTO v_E_id, v_E_name, v_Age, v_Salary;
+Explanation:
+•	Starts a loop (emp_loop) that fetches one row at a time from the cursor into the declared variables.
+________________________________________
+Exit Condition
+
+
+IF done THEN 
+    LEAVE emp_loop;
+END IF;
+Explanation:
+•	If all rows have been fetched (done = TRUE), the loop exits.
+________________________________________
+Inserting Fetched Data into the Temporary Table
 hiiiiiiiiiiiiiiiiiii
