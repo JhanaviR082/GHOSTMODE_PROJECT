@@ -1,1 +1,2 @@
 Contributed by Khushi
+Third contribution: Improved documentation layout
