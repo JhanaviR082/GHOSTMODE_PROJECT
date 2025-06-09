@@ -1,8 +1,7 @@
-<!comment in dashboard.html>
 {% extends 'base.html' %}
 {% load humanize %}
+{% load static %}
 {% load tz %}
-
 {% block content %}
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col lg:flex-row gap-8">
@@ -10,21 +9,112 @@
         <div class="lg:w-2/3">
             <!-- Header -->
             <div class="mb-8">
-                <h1 class="text-3xl font-bold text-white mb-2">Dashboard</h1>
-                <p class="text-gray-400">Track your digitaldetox progress here</p>
-            </div>
+                <h1 class="text-3xl font-bold text-white mb-2">
+                    {{ user.username|title }}'s Screen-Free Story
+                </h1>
+                <p class="text-gray-400">Track your unplugged achievements</p>
+
+
+                <!-- Flex container for ghost + circle -->
+                <div class="progress-wrapper" style="display: flex; align-items: center; gap: 50px; margin-top: 1rem;">
+                  <div class="progress-circle" data-progress="72">
+                    <span class="progress-value">0%</span>
+                  </div>
+              
+                  <div class="glowing-ghost">👻</div>
+                </div>
+              
+                <style>
+                  .progress-circle {
+                    position: relative;
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                    background: conic-gradient(#422489 0deg, #050837 0deg 360deg);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: 700;
+                    color: white;
+                    font-size: 1.6rem;
+                    user-select: none;
+                  }
+                  .progress-value {
+                    position: absolute;
+                    inset: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  }
+                  .glowing-ghost {
+                    font-size: 72px;
+                    user-select: none;
+                    animation: floatUpDown 3s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
+                    filter: drop-shadow(0 0 8px #7ac8ff);
+                    display: inline-block;
+                  }
+                  @keyframes floatUpDown {
+                    0%, 100% { transform: translateY(0); }
+                    50% { transform: translateY(-15px); }
+                  }
+                  @keyframes glowPulse {
+                    0%, 100% { filter: drop-shadow(0 0 8px #7a9dff); }
+                    50% { filter: drop-shadow(0 0 20px #4f73f7); }
+                  }
+                </style>
+<h3 id="total-detox-time" style="display:none;">{{ total_detox_time }}</h3>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const circle = document.querySelector(".progress-circle");
+    const valueEl = circle.querySelector(".progress-value");
+
+    const totalMinutesInDay = 1440;
+
+    // Get detox minutes from hidden element
+    const detoxMinutesText = document.getElementById('total-detox-time').textContent.trim();
+
+    // Parse detox minutes to integer, default 0
+    const detoxMinutes = parseInt(detoxMinutesText, 10) || 0;
+
+    // Clamp percentage between 0 and 100
+    const target = Math.min(100, Math.max(0, Math.round((detoxMinutes / totalMinutesInDay) * 100)));
+
+    console.log("Detox Minutes:", detoxMinutes);
+    console.log("Calculated Percentage:", target);
+
+    let current = 0;
+
+    function animate() {
+      if (current <= target) {
+        const degrees = (current / 100) * 360;
+        circle.style.background = `conic-gradient(#6b46c1 0deg ${degrees}deg, #444 ${degrees}deg 360deg)`;
+        valueEl.textContent = current + "%";
+        current++;
+        requestAnimationFrame(animate);
+      }
+    }
+
+    animate();
+  });
+</script>
+
+              </div>
+              
 
             <!-- Stats Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Current Streak Box - Adjusted -->
                 <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-gray-400">Current Streak</p>
-                            <h3 class="text-4xl font-bold text-white mt-1">{{ current_streak }}</h3>
-                            <p class="text-xs text-gray-500 mt-2">Longest streak: {{ longest_streak }} days</p>
+                    <div class="flex items-center justify-between h-full">
+                        <div class="flex flex-col justify-center items-start space-y-1">
+                            <p class="text-gray-400 text-sm font-medium">Current Streak</p>
+                            <p class="text-white text-3xl font-bold">{{ request.user.userprofile.current_streak }}</p>
+                            <p class="text-gray-400 text-sm font-medium mt-4">Longest Streak</p>
+                            <p class="text-white text-xl font-semibold">{{ request.user.userprofile.longest_streak }}</p>
                         </div>
-                        <div class="bg-ghost-primary/10 p-3 rounded-full">
-                            <span class="text-ghost-primary text-2xl">🔥</span>
+                        <div class="flex justify-center items-center bg-ghost-primary/10 p-4 rounded-full">
+                            <span class="text-ghost-primary text-4xl">🔥</span>
                         </div>
                     </div>
                 </div>
@@ -42,11 +132,10 @@
                     </div>
                 </div>
             </div>
-
-<!-- Replace the session control section with this -->
+            <!-- Session Control -->
 <div class="mb-8">
-    {% if active_session %}
     <div class="bg-ghost-dark rounded-xl p-6 border border-purple-500/20 shadow-lg relative">
+        {% if active_session %}
         <div class="absolute top-0 right-0 mt-2 mr-2">
             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 animate-pulse">
                 LIVE
@@ -59,32 +148,42 @@
                 Started: {{ active_session.start_time|localtime|time }}
             </div>
         </div>
-        
+
         <div class="mb-4">
             <div class="flex justify-between text-sm text-gray-400 mb-1">
-                <span>Duration::</span>
+                <span>Duration:</span>
                 <span id="session-timer">00:00:00</span>
             </div>
+            <div class="flex justify-between text-sm text-gray-400">
+                <span>Minutes detoxed:</span>
+                <span id="session-minutes">0</span>
+            </div>
         </div>
-        
-        <form method="post" action="{% url 'end_session' %}" class="mt-4">
-            {% csrf_token %}
-            <button type="submit" 
-                class="w-full flex items-center justify-center px-4 py-3 rounded-md text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-lg">
-                <span class="mr-2">⏹️</span> End Session
-            </button>
-        </form>
-    </div>
-    {% else %}
-    <form method="post" action="{% url 'start_session' %}">
+        {% endif %}
+
+
+    <!-- Start session button -->
+    <form method="post" action="{% url 'start_session' %}" class="mt-4">
         {% csrf_token %}
         <button type="submit" 
-            class="w-full flex items-center justify-center px-4 py-4 rounded-md text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 shadow-lg">
-            <span class="mr-2">👻</span> Start Ghost Session
-        </button>
+        class="w-full flex items-center justify-center px-4 py-4 rounded-md text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 shadow-lg">
+        <span class="mr-2">👻</span> Start Ghost Session
+    </button>
     </form>
-    {% endif %}
 </div>
+<form method="POST" action="{% url 'end_session' %}" id="endSessionForm">
+    {% csrf_token %}
+    <input type="hidden" name="duration" id="durationInput" value="0">
+    <button type="submit" class="w-full flex items-center justify-center px-4 py-3 rounded-md text-white bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 transition-all duration-200 shadow-lg">
+        <span class="mr-2">👻</span> End Ghost Session
+    </button>
+</form>
+
+{% if active_session %}
+<p class="mt-2 text-sm text-gray-400">Session started at: {{ active_session.start_time|date:"H:i:s" }}</p>
+{% endif %}
+</div>
+
             <!-- Daily Check-in -->
             <div class="mb-8">
                 <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg">
@@ -98,7 +197,7 @@
                     <form method="POST" action="{% url 'mark_detox_day' %}">
                         {% csrf_token %}
                         <button class="w-full flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition-all duration-200 shadow-lg">
-                            <span class="mr-2">✅</span> A click a day keeps the streak in play
+                            <span class="mr-2">✅</span> Keep your streak lit with a daily click
                         </button>
                     </form>
                     {% endif %}
@@ -108,7 +207,7 @@
             <!-- Notes Section -->
             <div class="mb-8">
                 <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg">
-                    <h3 class="text-lg font-medium text-white mb-4">Productive Things Done Instead</h3>
+                    <h3 class="text-lg font-medium text-white mb-4">Wins Outside the Screen:</h3>
                     <form method="POST" class="mb-6">
                         {% csrf_token %}
                         <div class="mb-4">
@@ -141,69 +240,218 @@
             </div>
         </div>
 
-        <!-- Sidebar -->
-        <div class="lg:w-1/3">
-            <!-- Badges Section -->
-            <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg mb-6">
-                <h3 class="text-lg font-medium text-white mb-4 flex items-center">
-                    <span class="mr-2">🏆</span> Your Badges
-                </h3>
-                
-                {% if badges %}
-                <div class="grid grid-cols-2 gap-4">
-                    {% for badge in badges %}
-                    <div class="text-center">
-                        <div class="mx-auto mb-2 w-16 h-16 rounded-full bg-ghost-darker border-2 border-ghost-primary/30 flex items-center justify-center p-2">
-                            <img src="{{ badge.badge.image.url }}" alt="{{ badge.badge.name }}" class="w-full h-full object-contain">
-                        </div>
-                        <h4 class="text-sm font-medium text-white">{{ badge.badge.name }}</h4>
-                        <p class="text-xs text-gray-400">{{ badge.badge.description }}</p>
-                    </div>
-                    {% endfor %}
+ <!-- Sidebar -->
+<div class="lg:w-1/3">
+    <!-- Badges Section -->
+    <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg mb-6">
+        <h3 class="text-lg font-medium text-white mb-4 flex items-center">
+            <span class="mr-2">🏆</span> Your Badges
+        </h3>
+        
+        {% if badges %}
+        <div class="grid grid-cols-2 gap-4">
+            {% for badge in badges %}
+            <div class="text-center">
+                <div class="mx-auto mb-2 w-16 h-16 rounded-full bg-ghost-darker border-2 border-ghost-primary/30 flex items-center justify-center p-2">
+                    <img src="{{ badge.badge.image.url }}" alt="{{ badge.badge.name }}" class="w-full h-full object-contain">
                 </div>
-                {% else %}
-                <div class="text-center py-6">
-                    <div class="mx-auto mb-4 w-20 h-20 rounded-full bg-ghost-darker border-2 border-dashed border-gray-600 flex items-center justify-center">
-                        <span class="text-gray-500 text-2xl">🏆</span>
-                    </div>
-                    <p class="text-gray-500">No badges yet. Keep going!</p>
-                </div>
-                {% endif %}
+                <h4 class="text-sm font-medium text-white">{{ badge.badge.name }}</h4>
+                <p class="text-xs text-gray-400">{{ badge.badge.description }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center py-6">
+            <div class="mx-auto mb-4 w-20 h-20 rounded-full bg-ghost-darker border-2 border-dashed border-gray-600 flex items-center justify-center">
+                <span class="text-gray-500 text-2xl">🏆</span>
+            </div>
+            <p class="text-gray-500">No badges yet. Keep going!</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- ✅ Motivating Quotes Section - Now correctly inside sidebar -->
+    <div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg">
+        <h3 class="text-lg font-medium text-white mb-4 flex items-center">
+            <span class="mr-2">💬</span> Pause & Reflect: Motivational Picks
+        </h3>
+        <div class="space-y-3">
+            <div class="p-4 rounded-lg bg-ghost-darker border border-ghost-primary/10">
+                <p class="text-sm text-gray-300 italic">“The best way out is always through.”</p>
+                <p class="text-xs text-gray-500 mt-1">– Robert Frost</p>
+            </div>
+            <div class="p-4 rounded-lg bg-ghost-darker border border-ghost-primary/10">
+                <p class="text-sm text-gray-300 italic">“You don’t have to control your thoughts. You just have to stop letting them control you.”</p>
+                <p class="text-xs text-gray-500 mt-1">– Dan Millman</p>
+            </div>
+            <div class="p-4 rounded-lg bg-ghost-darker border border-ghost-primary/10">
+                <p class="text-sm text-gray-300 italic">“Little by little, a little becomes a lot.”</p>
+                <p class="text-xs text-gray-500 mt-1">– Tanzanian Proverb</p>
             </div>
         </div>
     </div>
-</div>
-<div class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg">
-    <div class="flex items-center justify-between">
-        <div>
-            <p class="text-sm font-medium text-gray-400">Current Streak</p>
-            <h3 class="text-4xl font-bold text-white mt-1">{{ request.user.userprofile.detox_streak }}</h3>
-            <p class="text-xs text-gray-500 mt-2">Longest streak: {{ request.user.userprofile.longest_streak }} days</p>
-        </div>
-        <div class="bg-ghost-primary/10 p-3 rounded-full">
-            <span class="text-ghost-primary text-2xl">🔥</span>
-        </div>
-    </div>
-</div>
-{% endblock %}
+    <div id="memory-game" class="bg-ghost-dark rounded-xl p-6 border border-ghost-primary/20 shadow-lg mt-6">
+        <h3 class="text-lg font-medium text-white mb-4 flex items-center">
+          <span class="mr-2">🧩</span> Recall Rally
+        </h3>
+        <div id="game-board" class="grid grid-cols-4 gap-3"></div>
+        <p id="game-message" class="mt-4 text-green-400 font-semibold text-center hidden">🎉 Stellar job! You matched them all — keep rocking! 🎉</p>
+      </div>
+      
+      <style>
+        #game-board {
+          user-select: none;
+        }
+        .card {
+          background: #1a1a2e; /* darkish blue */
+          border-radius: 0.5rem;
+          height: 60px;
+          width: 60px;  
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.8rem;
+          color: #ffffff;
+          box-shadow: 0 0 5px #4c51bf;
+          transition: transform 0.3s;
+        }
+        .card.flipped {
+          background: #4c51bf; /* lighter purple */
+          color: #fff;
+          cursor: default;
+          transform: rotateY(180deg);
+        }
+        .card.matched {
+          background: #480cd5; /* green */
+          color: #fff;
+          cursor: default;
+        }
+      </style>
+      
+      <script>
+        (function() {
+          const symbols = ['🐱', '🐶', '🐭', '🐹', '🐰', '🦊', '🐻', '🐼']; // 8 pairs = 16 cards
+          let cards = symbols.concat(symbols);
+          cards.sort(() => 0.5 - Math.random());
+      
+          const board = document.getElementById('game-board');
+          const message = document.getElementById('game-message');
+      
+          let flippedCards = [];
+          let matchedCount = 0;
+      
+          function createCard(symbol) {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.symbol = symbol;
+            card.textContent = ''; // hidden initially
+            card.addEventListener('click', () => flipCard(card));
+            return card;
+          }
+      
+          function flipCard(card) {
+            if (flippedCards.length === 2 || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+      
+            card.classList.add('flipped');
+            card.textContent = card.dataset.symbol;
+            flippedCards.push(card);
+      
+            if (flippedCards.length === 2) {
+              checkMatch();
+            }
+          }
+      
+          function checkMatch() {
+            const [card1, card2] = flippedCards;
+            if (card1.dataset.symbol === card2.dataset.symbol) {
+              card1.classList.add('matched');
+              card2.classList.add('matched');
+              matchedCount += 2;
+              flippedCards = [];
+              if (matchedCount === cards.length) {
+                message.classList.remove('hidden');
+              }
+            } else {
+              setTimeout(() => {
+                card1.classList.remove('flipped');
+                card1.textContent = '';
+                card2.classList.remove('flipped');
+                card2.textContent = '';
+                flippedCards = [];
+              }, 1000);
+            }
+          }
+      
+          function init() {
+            board.innerHTML = '';
+            message.classList.add('hidden');
+            matchedCount = 0;
+            flippedCards = [];
+            cards.sort(() => 0.5 - Math.random());
+      
+            cards.forEach(symbol => {
+              board.appendChild(createCard(symbol));
+            });
+          }
+      
+          init();
+        })();
+      </script>
+</div> <!-- ✅ Close sidebar AFTER the quotes section -->
+
 
 {% if active_session %}
 <script>
-    // Timer functionality for active session
-    function updateTimer() {
-        const startTime = new Date("{{ active_session.start_time|date:'c' }}").getTime();
-        const now = new Date().getTime();
-        const diff = now - startTime;
+    // Enhanced timer functionality with error handling
+    document.addEventListener('DOMContentLoaded', function() {
+        const timerElement = document.getElementById('session-timer');
+        const minutesElement = document.getElementById('session-minutes');
+        const durationInput = document.getElementById('durationInput');
+        const endSessionForm = document.getElementById('endSessionForm');
+        
+        if (!timerElement || !minutesElement || !durationInput || !endSessionForm) {
+            console.error('Required elements not found');
+            return;
+        }
 
-        const hours = Math.floor(diff / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        try {
+            const startTime = new Date("{{ active_session.start_time|date:'c' }}").getTime();
+            if (isNaN(startTime)) throw new Error('Invalid start time');
 
-        document.getElementById('session-timer').textContent = 
-            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }
+            function updateTimer() {
+                const now = new Date().getTime();
+                const diff = now - startTime;
 
-    updateTimer();
-    setInterval(updateTimer, 1000);
+                // Calculate time components
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                const totalMinutes = Math.floor(diff / (1000 * 60));
+
+                // Update display
+                timerElement.textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                minutesElement.textContent = totalMinutes;
+                durationInput.value = totalMinutes;
+            }
+
+            // Initial update and set interval
+            updateTimer();
+            const timerInterval = setInterval(updateTimer, 1000);
+
+            // Cleanup on form submission
+            endSessionForm.addEventListener('submit', function() {
+                clearInterval(timerInterval);
+            });
+
+        } catch (error) {
+            console.error('Timer error:', error);
+            timerElement.textContent = '00:00:00';
+            minutesElement.textContent = '0';
+        }
+    });
+    
 </script>
 {% endif %}
+{% endblock %}

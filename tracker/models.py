@@ -21,27 +21,28 @@ class UserProfile(models.Model):
     current_streak = models.PositiveIntegerField(default=0)
     longest_streak = models.PositiveIntegerField(default=0)
     total_detox_minutes = models.PositiveIntegerField(default=0)
-    last_checkin = models.DateField(null=True, blank=True)
     total_minutes_detoxed = models.FloatField(default=0)
     total_detox_time = models.IntegerField(default=0)
+    last_checkin_date = models.DateField(null=True, blank=True)
     last_detox_date = models.DateField(null=True, blank=True)
+    detox_streak = models.PositiveIntegerField(default=0)
 
-    detox_streak = models.PositiveIntegerField(default=0) 
     def update_streak(self):
         today = timezone.now().date()
-        if self.last_checkin == today - timedelta(days=1):
+        if self.last_checkin_date == today - timedelta(days=1):
             self.current_streak += 1
-        elif self.last_checkin != today:
+        elif self.last_checkin_date != today:
             self.current_streak = 1
 
         if self.current_streak > self.longest_streak:
             self.longest_streak = self.current_streak
 
-        self.last_checkin = today
+        self.last_checkin_date = today
         self.save()
 
     def __str__(self):
-        return self.user.username
+        return f"{self.user.username}'s profile"
+
 
 class ProductiveNote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

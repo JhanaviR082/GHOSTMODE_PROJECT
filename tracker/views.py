@@ -52,41 +52,46 @@ def dashboard(request):
     
     return render(request, 'tracker/dashboard.html', {'quote': quote, 'author': author})
 
-
+@login_required
 def dashboard(request):
     profile = request.user.userprofile
-    
     today = timezone.now().date()
-
-    today_checkin, created = DailyCheckIn.objects.get_or_create(
+    today_checkin, _ = DailyCheckIn.objects.get_or_create(
         user=request.user,
         date=today,
         defaults={'checked_in': False}
     )
 
-    active_session = DetoxSession.objects.filter(
-        user=request.user,
-        end_time__isnull=True
-    ).first()
-
+    active_session = DetoxSession.objects.filter(user=request.user, end_time__isnull=True).first()
     badges = UserBadge.objects.filter(user=request.user).select_related('badge')
+    notes = ProductiveNote.objects.filter(user=request.user).order_by('-created_at')
 
-
-    if request.method == 'POST' and 'check_in' in request.POST:
-        if not today_checkin.checked_in:
+    if request.method == 'POST':
+        if 'check_in' in request.POST and not today_checkin.checked_in:
             today_checkin.checked_in = True
             today_checkin.save()
             profile.update_streak()
+
+        if 'note_submit' in request.POST:
+            form = ProductiveNoteForm(request.POST)
+            if form.is_valid():
+                note = form.save(commit=False)
+                note.user = request.user
+                note.save()
+                return redirect('dashboard')
+    else:
+        form = ProductiveNoteForm()
 
     context = {
         'profile': profile,
         'today_checkin': today_checkin,
         'active_session': active_session,
         'badges': badges,
-        'total_minutes': int(profile.total_detox_minutes),
+        'form': form,
+        'notes': notes,
+        'total_detox_time': profile.total_detox_time,
         'current_streak': profile.current_streak,
         'longest_streak': profile.longest_streak,
-        'total_detox_time': profile.total_detox_time
     }
     return render(request, 'tracker/dashboard.html', context)
 
@@ -129,23 +134,19 @@ def start_session(request):
 @login_required
 def end_session(request):
     if request.method == 'POST':
-        session = DetoxSession.objects.filter(
-            user=request.user, 
-            is_active=True
-        ).first()
+        session = DetoxSession.objects.filter(user=request.user, is_active=True).first()
         
         if session:
             session.end_time = timezone.now()
-            session.save()  # This triggers the save() method which calculates duration
+            session.save()  # Triggers duration calc and detox time update
             
-            messages.success(
-                request,
-                f"Great job! You detoxed for {int(session.duration)} minutes. 🎉"
-            )
+            minutes = int(session.duration or 0)
+            messages.success(request, f"Great job! You detoxed for {minutes} minutes. 🎉")
         else:
-            messages.error(request, "No active session found")
-            
+            messages.error(request, "No active session found.")
+
         return redirect('dashboard')
+
 
 @login_required
 def check_in(request):
@@ -206,30 +207,34 @@ def award_badges(user):
     for badge in badges:
         UserBadge.objects.get_or_create(user=user, badge=badge)
 
+
+from django.utils import timezone
+from .models import DailyCheckIn
+
 @login_required
 def mark_detox_day(request):
-    if request.method == 'POST':
-        today = date.today()
-        profile = request.user.userprofile
-        
-        if profile.last_detox_date == today:
-            messages.info(request, "You've already checked in today!")
-            return redirect('dashboard')
-        
-        yesterday = today - timedelta(days=1)
-        
-        if profile.last_detox_date == yesterday:
-            profile.detox_streak += 1
-        else:
-            profile.detox_streak = 1
-        
-        if profile.detox_streak > profile.longest_streak:
-            profile.longest_streak = profile.detox_streak
-        
-        profile.last_detox_date = today
-        profile.save()
-        
-        messages.success(request, f"Day {profile.detox_streak} of your detox streak!")
+    user_profile = request.user.userprofile
+    today = timezone.now().date()
+
+    # Check if already checked in today
+    if user_profile.last_checkin_date == today:
+        messages.info(request, "Already checked in today!")
         return redirect('dashboard')
-    
+
+    # If yesterday was also checked in, increment streak
+    yesterday = today - timedelta(days=1)
+    if user_profile.last_checkin_date == yesterday:
+        user_profile.current_streak += 1
+    else:
+        user_profile.current_streak = 1  # reset streak
+
+    # Update longest streak if needed
+    if user_profile.current_streak > user_profile.longest_streak:
+        user_profile.longest_streak = user_profile.current_streak
+
+    # Save last checkin date
+    user_profile.last_checkin_date = today
+    user_profile.save()
+
+    messages.success(request, "Check-in successful! Keep going!")
     return redirect('dashboard')

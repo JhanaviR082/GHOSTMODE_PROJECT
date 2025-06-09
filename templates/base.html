@@ -1,11 +1,10 @@
-<!HEY ALL JR82>
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-gray-900">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GhostMode | {% block title %}{% endblock %}</title>
+    <title>GhostMode 👻 {% block title %}{% endblock %}</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -54,41 +53,96 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body class="min-h-screen flex flex-col bg-ghost-darker text-gray-100">
-    <!-- Navbar -->
-    <nav class="bg-ghost-dark border-b border-ghost-primary/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
-                    <a href="{% url 'home' %}" class="flex-shrink-0 flex items-center">
-                        <span class="text-ghost-accent text-2xl">👻</span>
-                        <span class="ml-2 text-xl font-bold bg-gradient-to-r from-ghost-primary to-ghost-accent bg-clip-text text-transparent">GhostMode</span>
-                    </a>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-4">
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'dashboard' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
-                                <span class="mr-1">📊</span> Dashboard
-                            </a>
-                            <a href="{% url 'password_change' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
-                                <span class="mr-1">🔑.</span> Password
-                            </a>
-                            <a href="{% url 'logout' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
-                                <span class="mr-1">🚪..</span> Logout
-                            </a>
-                        {% else %}
-                            <a href="{% url 'login' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
-                                <span class="mr-1">🔑</span> Login
-                            </a>
-                            <a href="{% url 'signup' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
-                                <span class="mr-1">📝</span> Sign Up
-                            </a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+<!-- Navbar -->
+<nav class="bg-ghost-dark border-b border-ghost-primary/20 w-full relative">
+    <div class="w-full px-6 h-16 flex items-center justify-center relative">
+  
+      <!-- Center: Logo -->
+      <div class="absolute left-1/2 transform -translate-x-1/2">
+        <a href="{% url 'home' %}" class="flex items-center">
+          <span class="text-ghost-accent text-4xl">👻</span>
+          <span class="ml-2 text-3xl font-extrabold bg-gradient-to-r from-ghost-primary to-ghost-accent bg-clip-text text-transparent">
+            GhostMode
+          </span>
+        </a>
+      </div>
+  
+      <!-- Left: Dashboard + Audio Button -->
+      <div class="absolute left-0 pl-4 flex items-center space-x-2">
+        {% if user.is_authenticated %}
+          <a href="{% url 'dashboard' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
+            <span class="mr-1">📊</span> Dashboard
+          </a>
+        {% endif %}
+  
+        <!-- Audio Button -->
+        <button id="audio-button" class="audio-btn">🎧</button>
+  
+        <!-- Hidden audio element -->
+        <audio id="my-audio" src="{% static 'audio/bass-341320.mp3' %}"></audio>
+  
+        <style>
+          .audio-btn {
+            background: #6b46c1;
+            color: white;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(107, 70, 193, 0.5);
+            transition: background-color 0.3s ease;
+          }
+          .audio-btn:hover {
+            background: #5936a0;
+          }
+        </style>
+  
+        <script>
+          document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById("my-audio");
+            const btn = document.getElementById("audio-button");
+  
+            btn.addEventListener("click", () => {
+              if (audio.paused) {
+                audio.play();
+                btn.textContent = "🔇";
+              } else {
+                audio.pause();
+                btn.textContent = "🔈";
+              }
+            });
+  
+            audio.addEventListener("ended", () => {
+              btn.textContent = "🎧";
+            });
+          });
+        </script>
+      </div>
+  
+      <!-- Right: Auth Links -->
+      <div class="absolute right-0 pr-4 flex space-x-4 items-center">
+        {% if user.is_authenticated %}
+          <a href="{% url 'password_change' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
+            <span class="mr-1">🔑</span> Password
+          </a>
+          <a href="{% url 'logout' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
+            <span class="mr-1">🚪</span> Logout
+          </a>
+        {% else %}
+          <a href="{% url 'login' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
+            <span class="mr-1">🔑</span> Login
+          </a>
+          <a href="{% url 'signup' %}" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-ghost-dark/50 transition-all duration-200 flex items-center">
+            <span class="mr-1">📝</span> Sign Up
+          </a>
+        {% endif %}
+      </div>
+  
+    </div>
+  </nav>
+   
+
 
     <!-- Main Content -->
     <main class="flex-grow container mx-auto px-4 py-8">

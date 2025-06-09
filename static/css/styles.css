@@ -5,105 +5,154 @@
 
 /* Form inputs */
 input, textarea, select {
-  background-color: #0f172a !important;
-  border-color: #1e293b !important;
-  color: #f8fafc !important;
-}
-
-input:focus, textarea:focus, select:focus {
-  border-color: #6d28d9 !important;
-  box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.2) !important;
-}
-
-/* Buttons */
-.btn-primary {
-  background-color: #6d28d9;
-  border-color: #6d28d9;
-}
-
-.btn-primary:hover {
-  background-color: #5b21b6;
-  border-color: #5b21b6;
-}
-
-/* Cards */
-.card {
-  background-color: #0f172a;
-  border: 1px solid #1e293b;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-/* Animations */
-@keyframes pulse-glow {
-  0%, 100% {
-      box-shadow: 0 0 0 0 rgba(109, 40, 217, 0.7);
-  }
-  70% {
-      box-shadow: 0 0 0 10px rgba(109, 40, 217, 0);
-  }
-}
-
-.pulse-animate {
-  animation: pulse-glow 2s infinite;
-}
-
-/* Ghost session timer */
-.ghost-timer {
-  font-size: 3rem;
-  font-weight: bold;
-  color: #a78bfa;
-  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
-}
-
-/* Badges */
-.badge-icon {
-  transition: transform 0.3s ease;
-}
-
-.badge-icon:hover {
-  transform: scale(1.1) rotate(5deg);
-}
-
-/* Responsive adjustments */
-@media (max-width: 640px) {
-  .ghost-timer {
-      font-size: 2rem;
+    background-color: #0f172a !important;
+    border-color: #1e293b !important;
+    color: #f8fafc !important;
   }
   
-  .card {
-      border-radius: 0.5rem;
+  input:focus, textarea:focus, select:focus {
+    border-color: #6d28d9 !important;
+    box-shadow: 0 0 0 2px rgba(109, 40, 217, 0.2) !important;
   }
-}
+  
+  /* Buttons */
+  .btn-primary {
+    background-color: #6d28d9;
+    border-color: #6d28d9;
+  }
+  
+  .btn-primary:hover {
+    background-color: #5b21b6;
+    border-color: #5b21b6;
+  }
+  
+  /* Cards */
+  .card {
+    background-color: #0f172a;
+    border: 1px solid #1e293b;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Animations */
+  @keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(109, 40, 217, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(109, 40, 217, 0);
+    }
+  }
+  
+  .pulse-animate {
+    animation: pulse-glow 2s infinite;
+  }
+  
+  /* Ghost session timer */
+  .ghost-timer {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #a78bfa;
+    text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
+  }
+  
+  /* Badges */
+  .badge-icon {
+    transition: transform 0.3s ease;
+  }
+  
+  .badge-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .ghost-timer {
+        font-size: 2rem;
+    }
+    
+    .card {
+        border-radius: 0.5rem;
+    }
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #0f172a;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #6d28d9;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #5b21b6;
+  }
+  
+  /* Adjustments for Streak Box Placement */
+  .bg-ghost-dark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* End Session Button Styling */
+  button[type="submit"] {
+    font-weight: bold;
+    padding: 12px 20px;
+  }
+  
+  /* Glowing button */
+.glow-btn {
+    background: #6b46c1;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 8px #6b46c1;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .glow-btn:hover,
+  .glow-btn:focus {
+    box-shadow:
+      0 0 10px #b794f4,
+      0 0 20px #b794f4,
+      0 0 30px #b794f4;
+  }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
+  .glowing-ghost {
+    font-size: 72px;
+    user-select: none;
+    animation: floatUpDown 3s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px #7ac8ff);
+    display: inline-block;
+  }
+  
+  @keyframes floatUpDown {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+  
+  @keyframes glowPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 8px #7ac8ff);
+    }
+    50% {
+      filter: drop-shadow(0 0 20px #4fc3f7);
+    }
+  }
 
-::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #6d28d9;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #5b21b6;
-}
-
-/* Adjustments for Streak Box Placement */
-.bg-ghost-dark {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* End Session Button Styling */
-button[type="submit"] {
-  font-weight: bold;
-  padding: 12px 20px;
-}
+  
